@@ -1,4 +1,4 @@
-rule all_dedup:
+rule run_dedup:
 	input:
 		r1 = str(QC_FP/'cleaned'/'{sample}_1.fastq.gz'),
                 r2 = str(QC_FP/'cleaned'/'{sample}_2.fastq.gz') #files required for input	
@@ -7,12 +7,8 @@ rule all_dedup:
                 r2 = str(QC_FP/'cleaned_dedup'/'{sample}_2.fastq.gz') #files created after successful rule completion
 	shell:
 		"""
-                mv {input} {output}
                 clumpify.sh in1={input.r1} in2={input.r2} out1={output.r1} out2={output.r2}  dedupe=t optical=f
-                mv cleaned_dedup cleaned
-                if[ ! -f {input} ]; then
-                    echo "Subsampling failed"
-                    exit 1
-                    fi
-                  """
-
+                """
+rule all_dedup:
+        input:
+`                expand(str(QC_FP/'cleaned_dedup'/'{sample}_{rp}.fastq.gz'), sample=Samples.keys(),rp=Pairs)
