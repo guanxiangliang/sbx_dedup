@@ -1,6 +1,6 @@
 # Sunbeam extension sbx_dedup
 
-This is a Sunbeam (https://github.com/sunbeam-labs) extension deduplicate the sequncing reads after QC step. The process will remove both optical and PCR deplicates using BBtools (https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/clumpify-guide/).
+This is a Sunbeam (https://github.com/sunbeam-labs) extension deduplicate the sequncing reads after QC step. The process will remove both optical and PCR deplicates using BBtools (https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/clumpify-guide/). I used this extension to process my virome reads, since some examples have too many duplicates, which stacked in a very small region of viral genomes, resulting in strong signals after classification.  
 
 # Installing and running
 
