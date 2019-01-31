@@ -3,12 +3,13 @@ rule run_dedup:
 		r1 = str(QC_FP/'cleaned'/'{sample}_1.fastq.gz'),
                 r2 = str(QC_FP/'cleaned'/'{sample}_2.fastq.gz') #files required for input	
 	output:
-		r1 = str(QC_FP/'cleaned_dedup'/'{sample}_1.fastq.gz'),
-                r2 = str(QC_FP/'cleaned_dedup'/'{sample}_2.fastq.gz') #files created after successful rule completion
+		r1 = str(QC_FP/'cleaned_backup'/'{sample}_1.fastq.gz'),
+                r2 = str(QC_FP/'cleaned_backup'/'{sample}_2.fastq.gz') #files created after successful rule completion
 	shell:
 		"""
-                clumpify.sh in1={input.r1} in2={input.r2} out1={output.r1} out2={output.r2}  dedupe=t optical=f
+		mv {input} {output}
+                clumpify.sh in1={output.r1} in2={output.r2} out1={input.r1} out2={input.r2}  dedupe=t optical=f
                 """
 rule all_dedup:
         input:
-`                expand(str(QC_FP/'cleaned_dedup'/'{sample}_{rp}.fastq.gz'), sample=Samples.keys(),rp=Pairs)
+`                expand(str(QC_FP/'cleaned'/'{sample}_{rp}.fastq.gz'), sample=Samples.keys(),rp=Pairs)
