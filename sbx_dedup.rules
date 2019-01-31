@@ -12,4 +12,4 @@ rule run_dedup:
                 """
 rule all_dedup:
         input:
-`                expand(str(QC_FP/'cleaned'/'{sample}_{rp}.fastq.gz'), sample=Samples.keys(),rp=Pairs)
+                expand(str(QC_FP/'cleaned'/'{sample}_{rp}.fastq.gz'), sample=Samples.keys(),rp=Pairs)
