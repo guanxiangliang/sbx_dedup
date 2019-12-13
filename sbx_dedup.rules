@@ -5,6 +5,8 @@ rule run_dedup:
 	output:
 		r1 = str(QC_FP/'cleaned_backup'/'{sample}_1.fastq.gz'),
                 r2 = str(QC_FP/'cleaned_backup'/'{sample}_2.fastq.gz') #files created after successful rule completion
+	conda:
+		"sbx_dedup_env.yml"
 	shell:
 		"""
 		mv {input.r1}  {output.r1}
